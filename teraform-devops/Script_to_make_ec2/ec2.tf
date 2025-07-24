@@ -62,10 +62,10 @@ egress{
 resource "aws_instance" "my_instance" {
   key_name = aws_key_pair.make_key.key_name
   security_groups = [ aws_security_group.my_security_group.name ]
-  instance_type = "t2.micro"
-  ami = "ami-0f918f7e67a3323f0"
+  instance_type = var.aws_instance
+  ami = var.aws_instance
   root_block_device {
-    volume_size = 15
+    volume_size = var.aws_root_storage
     volume_type = "gp3"
   }
 
