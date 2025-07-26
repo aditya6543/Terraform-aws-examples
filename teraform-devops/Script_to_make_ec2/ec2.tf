@@ -60,6 +60,7 @@ egress{
 
 #make an instance
 resource "aws_instance" "my_instance" {
+  count = 1 #number of instances to be formed
   key_name = aws_key_pair.make_key.key_name
   security_groups = [ aws_security_group.my_security_group.name ]
   instance_type = var.aws_instance
