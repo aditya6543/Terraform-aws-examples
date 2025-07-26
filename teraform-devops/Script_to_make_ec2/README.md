@@ -41,15 +41,13 @@ Before you use this script, make sure you have the following set up:
    - You’ll need a public-private key pair if you plan to SSH into the EC2 instance.
    - Do **not** upload your `.pem` or `.pub` files to GitHub for security reasons.
 
----
-
+5. **Added a install_nginx.sh**
+   -this bash script installs nginx and creates a test html page to see if ngnix works properly
+----
 ## 🚀 How to Use
 
 1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/terraform-ec2-instance.git
-   cd terraform-ec2-instance
-
+   git clone "bla bla"
 2. Initialize Terraform:
 
 terraform init
@@ -64,8 +62,11 @@ terraform plan
 
 terraform apply
 
+5. Test the Nginx page
 
-5. To destroy the instance (when no longer needed):
+copy paste your instance public ip to browse
+
+6. To destroy the instance (when no longer needed):
 
 terraform destroy
 

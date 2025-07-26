@@ -64,6 +64,7 @@ resource "aws_instance" "my_instance" {
   security_groups = [ aws_security_group.my_security_group.name ]
   instance_type = var.aws_instance
   ami = var.aws_ami_id
+  user_data = file("install_nginx.sh")
   root_block_device {
     volume_size = var.aws_root_storage
     volume_type = "gp3"
