@@ -63,7 +63,7 @@ resource "aws_instance" "my_instance" {
   key_name = aws_key_pair.make_key.key_name
   security_groups = [ aws_security_group.my_security_group.name ]
   instance_type = var.aws_instance
-  ami = var.aws_instance
+  ami = var.aws_ami_id
   root_block_device {
     volume_size = var.aws_root_storage
     volume_type = "gp3"
