@@ -21,4 +21,4 @@ override.tf.json
 # .terraform directory (plugin and module downloads)
 .terraform/
 
-.terraform.lock.hcl
+
