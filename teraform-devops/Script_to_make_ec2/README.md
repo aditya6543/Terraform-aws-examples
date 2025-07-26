@@ -70,10 +70,13 @@ copy paste your instance public ip to browse
 
 terraform destroy
 
+-------------
+There are some commented out lines in the code with the explanation of what they do like metadata :-
+1. count (for numer of instance to be made)
+2. for_each and their outputs in outputs.tf (to make more than one instance but of different names and values)
 
 
-
----
+-------------
 
 ⚠️ Security Note
 

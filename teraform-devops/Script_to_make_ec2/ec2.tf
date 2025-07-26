@@ -60,19 +60,25 @@ egress{
 
 #make an instance
 resource "aws_instance" "my_instance" {
-  count = 1 #number of instances to be formed
+# #to create more than one ec2 instances
+#   for_each = tomap({
+#     my_t2micro = "t2.micro"
+#     my_t2medium = "t2.medium"
+#   })
+  # count = 1 #number of instances to be formed
+  depends_on = [ aws_key_pair.make_key , aws_security_group.my_security_group ]
   key_name = aws_key_pair.make_key.key_name
   security_groups = [ aws_security_group.my_security_group.name ]
-  instance_type = var.aws_instance
+  instance_type = var.aws_instance #if using for_each replace this with  instance_type = each.value
   ami = var.aws_ami_id
   user_data = file("install_nginx.sh")
   root_block_device {
     volume_size = var.aws_root_storage
     volume_type = "gp3"
+    
   }
-
   tags = {
-    Name = "tera-automate"
+  Name = "My_instance"   #if using for_each replace this with Name = each.key
   }
   
 }
