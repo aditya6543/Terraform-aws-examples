@@ -1,7 +1,4 @@
-Great! Based on your description, here's a professional and clear README.md content you can use for your Terraform EC2 automation project:
 
-
----
 
 # Terraform EC2 Instance Creation Script
 
