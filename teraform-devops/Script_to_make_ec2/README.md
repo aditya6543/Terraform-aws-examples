@@ -18,6 +18,16 @@ This project is a basic Terraform automation script that launches an EC2 instanc
   Contains the Terraform script that provisions an EC2 instance on AWS. Each block is well-commented to explain its purpose.
 
 ---
+- **remotebackup and state management**
+#creates a backup file on aws dynamo db and s3 to create a remote .tf file to manage conflicts and remote stage code to this is in another folder named terraform-remote
+  backend "s3" {                 
+    bucket = "adiremote-test"
+    key = "terraform.tfstate"
+    region = "ap-south-1"
+    dynamodb_table = "remote-infra"
+    
+  }
+
 
 ## ✅ Prerequisites
 

@@ -1,10 +1,13 @@
 #cnfigure aws credentials
 #add private and public keys for ec2
-resource aws_key_pair make_key {
+resource aws_key_pair my_key {
 
   
-  key_name = "terra-key-ec2"
+  key_name = "${var.env}-terra-key-ec2"
   public_key = file("terra-key-ec2.pub")
+  tags={
+    Environment = var.env
+  }
 
 }
 
@@ -15,10 +18,11 @@ resource "aws_default_vpc" "default" {
 
 #add a security group to your instance
 resource "aws_security_group" "my_security_group" {
-    name = "automate-sg"
+    name ="${var.env}-automate-sg"
+
     description = "this will add a tf generated security group"
     vpc_id = aws_default_vpc.default.id
-
+  
 #incoming traffic
 ingress{
         from_port = 22
@@ -54,20 +58,23 @@ egress{
     description = "all access open outbound"
 }
     tags={
-      Name = "automate-sg"
+      # Environment = var.env
+    Name = "${var.env}-automate-sg"
+
     }
 }
 
 #make an instance
 resource "aws_instance" "my_instance" {
-# #to create more than one ec2 instances
-#   for_each = tomap({
-#     my_t2micro = "t2.micro"
-#     my_t2medium = "t2.medium"
-#   })
+#to create more than one ec2 instances
+  for_each = tomap({
+    my_t2micro = "t2.micro"
+    # my_t2medium = "t2.medium"
+    # # my_t2small = "t2.large"
+  })
   # count = 1 #number of instances to be formed
-  depends_on = [ aws_key_pair.make_key , aws_security_group.my_security_group ]
-  key_name = aws_key_pair.make_key.key_name
+  depends_on = [ aws_key_pair.my_key , aws_security_group.my_security_group ]
+  key_name = aws_key_pair.my_key.key_name
   security_groups = [ aws_security_group.my_security_group.name ]
   instance_type = var.aws_instance #if using for_each replace this with  instance_type = each.value
   ami = var.aws_ami_id
@@ -79,6 +86,13 @@ resource "aws_instance" "my_instance" {
   }
   tags = {
   Name = "My_instance"   #if using for_each replace this with Name = each.key
+  Environment = var.env
   }
   
 }
+
+# resource "aws_instance" "my_new_instance" {
+#   ami = "unkown"
+#   instance_type = "unkown"
+  
+# }

@@ -11,3 +11,8 @@ variable "aws_root_storage" {
 variable "aws_ami_id" {
     default = "ami-0f918f7e67a3323f0"
 }
+
+variable "env" {
+  default = "dev"
+  type = string
+}
