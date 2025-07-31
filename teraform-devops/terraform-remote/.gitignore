@@ -1,0 +1,24 @@
+# SSH keys
+terra-key-ec2
+terra-key-ec2.pub
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Terraform crash logs
+crash.log
+
+# Terraform plan files
+*.tfplan
+
+# Terraform override files
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+
+# .terraform directory (plugin and module downloads)
+.terraform/
+
+
